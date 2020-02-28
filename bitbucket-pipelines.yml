@@ -1,0 +1,69 @@
+# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: node:10.15.3
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+          - npm install express
+          - npm install nodemon
+          - npm install express-ejs-layouts
+          # - node index.js
+
+    - step:
+        name: Deploy
+        deployment: production
+        service: 
+          - node
+        script:
+          - pipe: atlassian/aws-code-deploy:0.2.10
+            variables:
+              AWS_ACCESS_KEY_ID: 'AKIAXMOZTSCNYDBBWVMB'
+              AWS_SECRET_ACCESS_KEY: '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'
+              AWS_DEFAULT_REGION: 'ap-south-1'
+              APPLICATION_NAME: 'ravikeshnode'
+              DEPLOYMENT_GROUP: 'ravikesh'
+              WAIT: 'true'
+              S3_BUCKEt: 'sk045'
+              LOCAL_PATH: "dist"
+              IGNORE_APPLICATION_STOP_FAILURES: 'true'
+              FILE_EXISTS_BEHAVIOR: 'OVERWRITE'
+              COMMAND: 'deploy'
+options:
+  nodejs: true   
+
+# pipe: atlassian/aws-code-deploy:0.2.10
+# variables:
+#   AWS_ACCESS_KEY_ID: 'AKIAXMOZTSCNYDBBWVMB'
+#   AWS_SECRET_ACCESS_KEY: '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'
+#   AWS_DEFAULT_REGION: 'ap-south-1'
+#   DEPLOYMENT_CONFIG: 'CodeDeployDefault.AllAtOnce'
+#   APPLICATION_NAME: 'ravikeshnode'
+#   S3_BUCKEt: 'sk045'
+#   DEPLOYMENT_GROUP_NAME: 'ravikesh'
+#   WAIT: 'true'
+#   IGNORE_APPLICATION_STOP_FAILURES: 'true'
+
+#   COMMAND: 'deploy' 
+  # 'upload' or 'deploy'.
+
+  # Common variables
+  # S3_BUCKET: '<string>' # Optional.
+  # VERSION_LABEL: '<string>' # Optional.
+  # DEBUG: '<boolean>' # Optional.
+
+  # Upload variables
+  # ZIP_FILE: '<string>'
+
+  # Deploy variables
+  # DEPLOYMENT_GROUP: '<string>'
+  # FILE_EXISTS_BEHAVIOR: '<string>' # Optional.
+  # IGNORE_APPLICATION_STOP_FAILURES: '<boolean>' # Optional.
+  # WAIT: '<boolean>' # Optional.
+  # EXTRA_ARGS: '<string>' # Optional.

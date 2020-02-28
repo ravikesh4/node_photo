@@ -1,0 +1,14 @@
+.body-color {
+    background-color: rgb(240, 240, 240);
+}
+.hover-box:hover {
+    background-color: white;
+}
+a.service-link {
+    text-decoration: none;
+
+}
+
+@media screen and (min-width: 900px) {
+
+}

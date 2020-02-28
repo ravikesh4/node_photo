@@ -1,0 +1,23 @@
+{
+  "name": "photo",
+  "version": "1.0.0",
+  "description": "Its an Photography website",
+  "main": "app.js",
+  
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "photography",
+    "photo",
+    "recording"
+  ],
+  "author": "Ravikesh Yadav",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0"
+
+  }
+}
